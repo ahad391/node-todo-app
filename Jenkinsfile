@@ -19,7 +19,7 @@ pipeline {
                     def image = "${app}:${version}"
                     withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                         sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
-                        sh "docker push ${image}"
+                        sh "docker push ${DOCKER_HUB_USERNAME}/${image}"
                     }
                 }
             }
