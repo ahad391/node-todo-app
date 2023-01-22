@@ -28,10 +28,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps {
                 script {
-                    def app = 'my-todo-app'
-                    def version = env.BUILD_NUMBER
-                    def image = "${app}:${version}"
-                    sh "sed -i 's|IMAGE_NAME|${image}|g' k8s/deployment.yaml"
+                    
                     sh "kubectl apply -f k8s/deployment.yaml"
                 }
             }
