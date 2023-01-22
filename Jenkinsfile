@@ -24,19 +24,19 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy to GKE') {
-        //     steps {
-        //         script {
-        //             withCredentials([file(credentialsId: 'gke_credentials', variable: 'GKE_CREDENTIALS')]) {
-        //                 sh 'gcloud auth activate-service-account --key-file=$GKE_CREDENTIALS'
-        //                 sh 'gcloud container clusters get-credentials my-cluster --zone us-central1-a --project my-project'
-        //             }
-        //             def app = 'my-app'
-        //             def version = env.BUILD_NUMBER
-        //             def image = "${app}:${version}"
-        //             sh "kubectl set image deployment/${app} ${app}=${image}"
-        //         }
-        //     }
-        // }
+        stage('Deploy to GKE') {
+            steps {
+                script {
+                    withCredentials([file(credentialsId: 'gke_credentials', variable: 'GKE_CREDENTIALS')]) {
+                        sh 'gcloud auth activate-service-account --key-file=$GKE_CREDENTIALS'
+                        sh 'gcloud container clusters get-credentials my-cluster --zone us-central1-a --project my-project'
+                    }
+                    def app = 'my-app'
+                    def version = env.BUILD_NUMBER
+                    def image = "${app}:${version}"
+                    sh "kubectl set image deployment/${app} ${app}=${image}"
+                }
+            }
+        }
     }
 }
