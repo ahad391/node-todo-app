@@ -14,7 +14,7 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    def app = 'my-app'
+                    def app = 'my-todo-app'
                     def version = env.BUILD_NUMBER
                     def image = "${app}:${version}"
                     withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
