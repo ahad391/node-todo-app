@@ -7,7 +7,7 @@ pipeline {
                     def app = 'my-todo-app'
                     def version = env.BUILD_NUMBER
                     def image = "${app}:${version}"
-                    sh "docker build -t ${image} ."
+                    sh "docker build -t ahad391/${image} ."
                 }
             }
         }
